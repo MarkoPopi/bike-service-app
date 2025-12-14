@@ -66,8 +66,9 @@ type PriceItem = {
   category: string;
   label: string;
   priceText: string;
+  isPackage?: boolean;
+  details?: string[];   // če boš za pakete prikazoval kaj vključuje
 };
-
 /* ===================== CENIK (osnova) ===================== */
 const PRICELIST: PriceItem[] = [
   // ===================== PAKETI =====================
