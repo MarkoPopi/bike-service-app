@@ -9,6 +9,7 @@
   --card: #ffffff;
   --border: #cbd5e1; /* malo temnejša + bolj vidna */
   --btn: #f1f5f9;      /* slate-100 */
+  --muted: #64748b;    /* ✅ DODANO (slate-500) */
 }
 
 html.dark {
@@ -69,6 +70,7 @@ body {
 }
 .cardTitle { font-weight: 700; margin-bottom: 8px; }
 .cardText { color: var(--muted); font-size: 14px; line-height: 1.4; }
+
 /* Cenik UI helpers */
 .pill {
   display: inline-flex;
