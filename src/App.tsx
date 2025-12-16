@@ -288,13 +288,14 @@ async function fetchCustomersFromDb(): Promise<Customer[]> {
 }
 
 async function upsertCustomerToDb(customer: Customer): Promise<void> {
-  const { error } = await supabase.from("customers").upsert(
-    {
-      id: customer.id,
-      payload: customer,
-    },
-    { onConflict: "id" }
-  );
+  const { data, error } = await supabase
+    .from("customers")
+    .upsert({ id: customer.id, payload: customer }, { onConflict: "id" });
+
+  console.log("UPSERT RESULT:", { data, error });
+
+  if (error) throw error;
+}
 
   if (error) throw error;
 }
@@ -378,6 +379,23 @@ export default function App() {
     const saved = localStorage.getItem("theme");
     return saved === "dark" ? "dark" : "light";
   });
+    const saveTimerRef = React.useRef<number | null>(null);
+  const latestToSaveRef = React.useRef<Customer | null>(null);
+
+  function scheduleUpsert(customer: Customer) {
+    latestToSaveRef.current = customer;
+
+    if (saveTimerRef.current) {
+      window.clearTimeout(saveTimerRef.current);
+    }
+
+    saveTimerRef.current = window.setTimeout(() => {
+      const c = latestToSaveRef.current;
+      if (!c) return;
+      upsertCustomerToDb(c).catch(console.error);
+    }, 500);
+  }
+
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
@@ -447,19 +465,25 @@ export default function App() {
   }
 
   function updateCustomer(id: string, patch: Partial<Customer>) {
-    let updated: Customer | null = null;
+    setCustomers((prev) => {
+      let updatedCustomer: Customer | null = null;
 
-    setCustomers((prev) =>
-      prev.map((c) => {
+      const next = prev.map((c) => {
         if (c.id !== id) return c;
-        updated = { ...c, ...patch };
-        return updated;
-      })
-    );
+        updatedCustomer = { ...c, ...patch };
+        return updatedCustomer;
+      });
 
-    if (updated) {
-      upsertCustomerToDb(updated).catch(console.error);
-    }
+      if (updatedCustomer) scheduleUpsert(updatedCustomer);
+      return next;
+    });
+  }
+
+if (updated) {
+  upsertCustomerToDb(updated)
+    .then(() => setDbStatus(""))
+    .catch((e) => setDbStatus("Napaka shranjevanja: " + (e?.message ?? String(e))));
+}
   }
 
   function deleteCustomer(id: string) {
@@ -846,9 +870,9 @@ function ProfilePage(props: { customer: Customer; onBack: () => void; onUpdate: 
 
         {showCustomerDetails && (
           <div style={{ display: "grid", gap: 8, maxWidth: 520, marginTop: 12 }}>
-            <EditableField label="Ime" value={c.name} onChange={(v) => props.onUpdate({ name: v })} />
-            <EditableField label="Telefon" value={c.phone ?? ""} onChange={(v) => props.onUpdate({ phone: v.trim() ? v : undefined })} />
-            <EditableField label="Mail" value={c.email ?? ""} onChange={(v) => props.onUpdate({ email: v.trim() ? v : undefined })} />
+<EditableField label="Ime" value={c.name} onCommit={(v) => props.onUpdate({ name: v })} />
+<EditableField label="Telefon" value={c.phone ?? ""} onCommit={(v) => props.onUpdate({ phone: v.trim() ? v : undefined })} />
+<EditableField label="Mail" value={c.email ?? ""} onCommit={(v) => props.onUpdate({ email: v.trim() ? v : undefined })} />
           </div>
         )}
       </section>
@@ -935,12 +959,32 @@ function TabBtn(props: { active: boolean; onClick: () => void; children: React.R
 }
 
 function EditableField(props: { label: string; value: string; onChange: (v: string) => void }) {
+  const [local, setLocal] = React.useState(props.value);
+
+  React.useEffect(() => {
+    setLocal(props.value);
+  }, [props.value]);
+
+  function commit() {
+    if (local !== props.value) props.onChange(local);
+  }
+
   return (
     <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 10, alignItems: "center", textAlign: "left" }}>
       <div className="muted" style={{ fontSize: 12, fontWeight: 800 }}>
         {props.label}
       </div>
-      <input className="input" value={props.value} onChange={(e) => props.onChange(e.target.value)} />
+      <input
+        className="input"
+        value={local}
+        onChange={(e) => setLocal(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            (e.target as HTMLInputElement).blur(); // commit
+          }
+        }}
+      />
     </div>
   );
 }
@@ -1326,7 +1370,12 @@ function Label(props: { children: React.ReactNode }) {
       {props.children}
     </div>
   );
+}if (updated) {
+  upsertCustomerToDb(updated)
+    .then(() => setDbStatus(""))
+    .catch((e) => setDbStatus("Napaka shranjevanja: " + (e?.message ?? String(e))));
 }
+
 function Field(props: { label: string; tint?: "blue" | "red"; children: React.ReactNode }) {
   const color = props.tint === "blue" ? "#2563eb" : props.tint === "red" ? "#dc2626" : "var(--muted)";
   return (
