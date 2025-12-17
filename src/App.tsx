@@ -591,7 +591,7 @@ function ProfilePage(props: { customer: Customer; onBack: () => void; onDelete: 
           </div>
         </div>
 
-{showCustomerDetails && <CustomerEditForm customer={c} onSave={props.onUpdate} />}
+{showCustomerDetails && <CustomerEditForm customer={c} onSave={(patch) => props.onSave({ ...c, ...patch })} />}
       </section>
 
       <div style={{ display: "grid", gap: 12, marginTop: 12 }}>
@@ -689,24 +689,6 @@ function TabBtn(props: { active: boolean; onClick: () => void; children: React.R
 }
 
 /* ===== KLJUČ: onCommit (shrani ob blur) — ne bo “samo prva črka” ===== */
-function EditableField(props: { label: string; value: string; onCommit: (v: string) => void }) {
-  const [v, setV] = React.useState(props.value);
-  React.useEffect(() => setV(props.value), [props.value]);
-
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 10, alignItems: "center", textAlign: "left" }}>
-      <div className="muted" style={{ fontSize: 12, fontWeight: 800 }}>
-        {props.label}
-      </div>
-      <input
-        className="input"
-        value={v}
-        onChange={(e) => setV(e.target.value)}
-        onBlur={() => props.onCommit(v)}
-      />
-    </div>
-  );
-}
 
 function WorkOrdersList(props: { items: WorkOrder[]; onDone: (id: string) => void }) {
   if (props.items.length === 0) return <div className="muted">Ni delovnih nalogov.</div>;
