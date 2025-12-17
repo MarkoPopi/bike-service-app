@@ -1,10 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
 
-const url = import.meta.env.VITE_SUPABASE_URL as string;
-const anon = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const anon = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
-if (!url || !anon) {
-  throw new Error("Manjka VITE_SUPABASE_URL ali VITE_SUPABASE_ANON_KEY v .env");
-}
+export const SUPABASE_ENV = {
+  urlPresent: Boolean(url && url.trim()),
+  anonPresent: Boolean(anon && anon.trim()),
+  origin: typeof window !== "undefined" ? window.location.origin : "",
+  urlHint: url ? `${url.slice(0, 18)}…` : "",
+};
 
-export const supabase = createClient(url, anon);
+export const supabase =
+  url && anon ? createClient(url, anon) : null;

@@ -70,8 +70,8 @@ type PriceItem = {
   isPackage?: boolean;
 };
 
-/* ===================== CENIK (osnova) ===================== */
-/* ===================== CENIK (celoten) ===================== */
+/* ===================== CENIK ===================== */
+/* Opomba: UI uporablja label + priceText. (Opisne alineje iz PDF/strani niso nujne za delovanje) */
 const PRICELIST: PriceItem[] = [
   // ===================== PAKETI =====================
   { id: "pkg_basic", category: "Paketi", label: "Osnovni servis", priceText: "58,00 €", isPackage: true },
@@ -104,7 +104,7 @@ const PRICELIST: PriceItem[] = [
   { id: "srv_cranks_swap", category: "Posamezni servisi", label: "Zamenjava gonilk", priceText: "17,00 €" },
 
   { id: "srv_true_wheel", category: "Posamezni servisi", label: "Centriranje obročnika", priceText: "15,00 €" },
-  { id: "srv_wheel_build", category: "Posamezni servisi", label: "Pletenje obročnika (tudi pri zamenjavi obroča ali pesta)", priceText: "58,00 €" },
+  { id: "srv_wheel_build", category: "Posamezni servisi", label: "Pletenje obročnika", priceText: "58,00 €" },
   { id: "srv_front_hub_repair", category: "Posamezni servisi", label: "Popravilo prednjega pesta", priceText: "Po delovnih urah" },
   { id: "srv_rear_hub_repair", category: "Posamezni servisi", label: "Popravilo zadnjega pesta", priceText: "Po delovnih urah" },
 
@@ -114,25 +114,24 @@ const PRICELIST: PriceItem[] = [
 
   { id: "srv_tire_tube_simple", category: "Posamezni servisi", label: "Zamenjava plašča z zračnico", priceText: "13,00 €" },
   { id: "srv_tire_tube_complex", category: "Posamezni servisi", label: "Zamenjava plašča z zračnico – kompleksna", priceText: "17,00 €" },
-  { id: "srv_tire_tubeless_swap", category: "Posamezni servisi", label: "Zamenjava plašča tubeless (tesnilna tekočina vključena, brez menjave traku)", priceText: "18,00 €" },
-  { id: "srv_rim_tubeless_prep", category: "Posamezni servisi", label: "Priprava obročnika za tubeless (trak+ventil; trak vključen)", priceText: "18,00 €" },
-  { id: "srv_tubeless_system", category: "Posamezni servisi", label: "Izdelava tubeless sistema (trak+ventil+tesnilna tekočina vključeno)", priceText: "30,00 €" },
+  { id: "srv_tire_tubeless_swap", category: "Posamezni servisi", label: "Zamenjava plašča tubeless", priceText: "18,00 €" },
+  { id: "srv_rim_tubeless_prep", category: "Posamezni servisi", label: "Priprava obročnika za tubeless (trak+ventil)", priceText: "18,00 €" },
+  { id: "srv_tubeless_system", category: "Posamezni servisi", label: "Izdelava tubeless sistema", priceText: "30,00 €" },
 
   { id: "srv_tube_swap", category: "Posamezni servisi", label: "Zamenjava zračnice", priceText: "12,00 €" },
   { id: "srv_tube_swap_complex", category: "Posamezni servisi", label: "Zamenjava zračnice – kompleksna", priceText: "15,00 €" },
 
   { id: "srv_spoke_swap", category: "Posamezni servisi", label: "Zamenjava napere", priceText: "Po delovnih urah" },
-  { id: "srv_cable_housing", category: "Posamezni servisi", label: "Zamenjava pletenice/bovdna + nova nastavitev zavore/menjalnika", priceText: "17,00 €" },
+  { id: "srv_cable_housing", category: "Posamezni servisi", label: "Zamenjava pletenice/bovdna + nova nastavitev", priceText: "17,00 €" },
 
   { id: "srv_derailleur_adjust", category: "Posamezni servisi", label: "Nastavitev menjalnika", priceText: "15,00 €" },
   { id: "srv_derailleur_swap_adjust", category: "Posamezni servisi", label: "Zamenjava in nastavitev menjalnika", priceText: "30,00 €" },
-  { id: "srv_shifter_repair", category: "Posamezni servisi", label: "Popravilo ali zamenjava prestavne ročke", priceText: "Po delovnih urah" },
+  { id: "srv_shifter_repair", category: "Posamezni servisi", label: "Popravilo/zamenjava prestavne ročke", priceText: "Po delovnih urah" },
 
-  // Zavore (kot prej, samo kategorija “Zavore”)
-  { id: "srv_hydro_brake_install", category: "Zavore", label: "Montaža hidravlične zavore (prednja ali zadnja)", priceText: "Po delovnih urah" },
+  { id: "srv_hydro_brake_install", category: "Zavore", label: "Montaža hidravlične zavore", priceText: "Po delovnih urah" },
   { id: "srv_brake_adjust", category: "Zavore", label: "Nastavitev zavor", priceText: "Od 17,00 € naprej" },
-  { id: "srv_brake_bleed", category: "Zavore", label: "Zračenje hidravlične zavore z menjavo olja (olje vključeno)", priceText: "22,00 €" },
-  { id: "srv_pads_swap", category: "Zavore", label: "Zamenjava zavornih oblog + nastavitev zavore", priceText: "24,00 €" },
+  { id: "srv_brake_bleed", category: "Zavore", label: "Zračenje hidravlične zavore (olje vključeno)", priceText: "22,00 €" },
+  { id: "srv_pads_swap", category: "Zavore", label: "Zamenjava zavornih oblog + nastavitev", priceText: "24,00 €" },
   { id: "srv_hydro_parts_swap", category: "Zavore", label: "Zamenjava ročke/čeljusti/cevi (zračenje vključeno)", priceText: "Po delovnih urah" },
   { id: "srv_rotor_swap", category: "Zavore", label: "Zamenjava rotorja", priceText: "12,00 €" },
 
@@ -149,7 +148,7 @@ const PRICELIST: PriceItem[] = [
   { id: "extra_internal", category: "Doplačila", label: "Doplačilo: notranja napeljava bovdnov", priceText: "15,00 €" },
   { id: "extra_rim_insert", category: "Doplačila", label: "Doplačilo: zaščitni vložki obročev", priceText: "15,00 €" },
   { id: "extra_storage", category: "Doplačila", label: "Ležarina (na dan)", priceText: "5,00 € / dan" },
-  { id: "extra_special_bikes", category: "Doplačila", label: "Posebna športna kolesa (triatlon/aero) – dodatno delo", priceText: "58,00 € / uro" },
+  { id: "extra_special_bikes", category: "Doplačila", label: "Posebna športna kolesa – dodatno delo", priceText: "58,00 € / uro" },
 
   // ===================== VILICE ROCKSHOX =====================
   { id: "rs_28_32_small", category: "Vilice RockShox", label: "28/30/32mm (brez SID/Reba/RS-1) – mali servis", priceText: "39,00 €" },
@@ -163,25 +162,25 @@ const PRICELIST: PriceItem[] = [
   { id: "rs_35_38_basic", category: "Vilice RockShox", label: "35/38mm (brez Charger) – osnovni servis", priceText: "85,00 €" },
   { id: "rs_35_38_gen", category: "Vilice RockShox", label: "35/38mm (brez Charger) – generalni servis", priceText: "105,00 €" },
 
-  { id: "rs_charger_small", category: "Vilice RockShox", label: "Charger (BoXXer/Lyrik/Pike/ZEB/SID...) – mali servis", priceText: "39,00 €" },
-  { id: "rs_charger_basic", category: "Vilice RockShox", label: "Charger (BoXXer/Lyrik/Pike/ZEB/SID...) – osnovni servis", priceText: "85,00 €" },
-  { id: "rs_charger_gen", category: "Vilice RockShox", label: "Charger (BoXXer/Lyrik/Pike/ZEB/SID...) – generalni servis", priceText: "140,00 €" },
+  { id: "rs_charger_small", category: "Vilice RockShox", label: "Charger – mali servis", priceText: "39,00 €" },
+  { id: "rs_charger_basic", category: "Vilice RockShox", label: "Charger – osnovni servis", priceText: "85,00 €" },
+  { id: "rs_charger_gen", category: "Vilice RockShox", label: "Charger – generalni servis", priceText: "140,00 €" },
 
   // ===================== VILICE FOX & MARZOCCHI =====================
   { id: "fox32_small", category: "Vilice FOX & Marzocchi", label: "FOX 32 – mali servis", priceText: "39,00 €" },
   { id: "fox32_basic", category: "Vilice FOX & Marzocchi", label: "FOX 32 – osnovni servis", priceText: "89,00 €" },
-  { id: "fox32_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 32 (od 2016 naprej NA2) – generalni servis", priceText: "149,00 €" },
+  { id: "fox32_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 32 (od 2016 NA2) – generalni servis", priceText: "149,00 €" },
   { id: "fox32_gen_old", category: "Vilice FOX & Marzocchi", label: "FOX 32 (do 2016) – generalni servis", priceText: "119,00 €" },
 
   { id: "fox34_small", category: "Vilice FOX & Marzocchi", label: "FOX 34 / Marzocchi Z2 – mali servis", priceText: "39,00 €" },
   { id: "fox34_basic", category: "Vilice FOX & Marzocchi", label: "FOX 34 / Marzocchi Z2 – osnovni servis", priceText: "89,00 €" },
-  { id: "fox34_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 34 (od 2016 naprej NA2) – generalni servis", priceText: "149,00 €" },
+  { id: "fox34_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 34 (od 2016 NA2) – generalni servis", priceText: "149,00 €" },
   { id: "fox34_gen_old", category: "Vilice FOX & Marzocchi", label: "FOX 34 (do 2016) – generalni servis", priceText: "125,00 €" },
   { id: "z2_gen", category: "Vilice FOX & Marzocchi", label: "Marzocchi Z2 – generalni servis", priceText: "149,00 €" },
 
   { id: "fox36_small", category: "Vilice FOX & Marzocchi", label: "FOX 36 / Marzocchi / DJ – mali servis", priceText: "39,00 €" },
   { id: "fox36_basic", category: "Vilice FOX & Marzocchi", label: "FOX 36 / Marzocchi / DJ – osnovni servis", priceText: "89,00 €" },
-  { id: "fox36_gen_na3", category: "Vilice FOX & Marzocchi", label: "FOX 36 (od 2016 naprej NA3) – generalni servis", priceText: "169,00 €" },
+  { id: "fox36_gen_na3", category: "Vilice FOX & Marzocchi", label: "FOX 36 (od 2016 NA3) – generalni servis", priceText: "169,00 €" },
   { id: "fox36_gen_2015_2025", category: "Vilice FOX & Marzocchi", label: "FOX 36 (2015–2025 NA/NA2) – generalni servis", priceText: "159,00 €" },
   { id: "fox36_gen_to2015", category: "Vilice FOX & Marzocchi", label: "FOX 36 (do 2015) – generalni servis", priceText: "139,00 €" },
   { id: "z1_gen", category: "Vilice FOX & Marzocchi", label: "Marzocchi Z1 – generalni servis", priceText: "155,00 €" },
@@ -189,11 +188,11 @@ const PRICELIST: PriceItem[] = [
 
   { id: "fox38_small", category: "Vilice FOX & Marzocchi", label: "FOX 38 – mali servis", priceText: "39,00 €" },
   { id: "fox38_basic", category: "Vilice FOX & Marzocchi", label: "FOX 38 – osnovni servis", priceText: "92,00 €" },
-  { id: "fox38_gen", category: "Vilice FOX & Marzocchi", label: "FOX 38 (vsi modeli) – generalni servis", priceText: "169,00 €" },
+  { id: "fox38_gen", category: "Vilice FOX & Marzocchi", label: "FOX 38 – generalni servis", priceText: "169,00 €" },
 
   { id: "fox40_small", category: "Vilice FOX & Marzocchi", label: "FOX 40 / Bomber 58 – mali servis", priceText: "39,00 €" },
   { id: "fox40_basic", category: "Vilice FOX & Marzocchi", label: "FOX 40 / Bomber 58 – osnovni servis", priceText: "95,00 €" },
-  { id: "fox40_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 40 (od 2016 naprej NA2) – generalni servis", priceText: "175,00 €" },
+  { id: "fox40_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 40 (od 2016 NA2) – generalni servis", priceText: "175,00 €" },
   { id: "fox40_gen_old", category: "Vilice FOX & Marzocchi", label: "FOX 40 (do 2016) – generalni servis", priceText: "140,00 €" },
   { id: "bomber58_gen", category: "Vilice FOX & Marzocchi", label: "Marzocchi Bomber 58 – generalni servis", priceText: "174,00 €" },
 
@@ -225,14 +224,13 @@ const PRICELIST: PriceItem[] = [
   { id: "fox_drcv_small", category: "Amortizerji FOX", label: "Float DRCV – mali servis", priceText: "32,00 €" },
   { id: "fox_drcv_gen", category: "Amortizerji FOX", label: "Float DRCV – generalni servis", priceText: "119,00 €" },
 
-  { id: "fox_nude_gen", category: "Amortizerji FOX", label: "Float NUDE 3–5/T/TR – generalni servis", priceText: "115,00 €" },
+  { id: "fox_nude_gen", category: "Amortizerji FOX", label: "Float NUDE 3-5/T/TR – generalni servis", priceText: "115,00 €" },
   { id: "fox_dhx2_gen", category: "Amortizerji FOX", label: "DHX2 / DHX RC2/RC4 – generalni servis", priceText: "115,00 €" },
   { id: "fox_van_gen", category: "Amortizerji FOX", label: "VAN R/RC, DHX 3.0/4.0/5.0 – generalni servis", priceText: "110,00 €" },
 
-  // dodatki iz tvojega cenika (FOX amortizerji)
-  { id: "cannondale_gemini_small", category: "Amortizerji FOX", label: "Cannondale GEMINI – mali servis", priceText: "35,00 €" },
-  { id: "cannondale_gemini_gen", category: "Amortizerji FOX", label: "Cannondale GEMINI – generalni servis", priceText: "109,00 €" },
-  { id: "cannondale_dyad_gen", category: "Amortizerji FOX", label: "Cannondale DYAD – generalni servis", priceText: "150,00 €" },
+  { id: "can_gemini_small", category: "Amortizerji FOX", label: "Cannondale GEMINI – mali servis", priceText: "35,00 €" },
+  { id: "can_gemini_gen", category: "Amortizerji FOX", label: "Cannondale GEMINI – generalni servis", priceText: "109,00 €" },
+  { id: "can_dyad_gen", category: "Amortizerji FOX", label: "Cannondale DYAD – generalni servis", priceText: "150,00 €" },
   { id: "canyon_shapeshifter_gen", category: "Amortizerji FOX", label: "Canyon Shapeshifter 2.0 – generalni servis", priceText: "95,00 €" },
 
   // ===================== VILICE CANNONDALE =====================
@@ -241,27 +239,28 @@ const PRICELIST: PriceItem[] = [
   { id: "lefty_gen", category: "Vilice Cannondale", label: "Lefty Speed/Hybrid/Ocho/Oliver – generalni servis", priceText: "150,00 €" },
   { id: "headshok_gen", category: "Vilice Cannondale", label: "Headshok – generalni servis", priceText: "115,00 €" },
 
-  // ===================== POTOPNE SEDEŽNE OPORE =====================
-  { id: "reverb_small", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – mali servis", priceText: "29,00 €" },
-  { id: "reverb_gen", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – generalni servis", priceText: "115,00 €" },
-  { id: "reverb_gen_no_bleed", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – generalni servis (brez zračenja cevi/ročke)", priceText: "105,00 €" },
-  { id: "reverb_bleed", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – zračenje cevi in ročke", priceText: "18,00 €" },
+  // ===================== SEDEŽNE OPORE =====================
+  { id: "reverb_small", category: "Potopne sedežne opore", label: "RockShox Reverb – mali servis", priceText: "29,00 €" },
+  { id: "reverb_gen", category: "Potopne sedežne opore", label: "RockShox Reverb – generalni servis", priceText: "115,00 €" },
+  { id: "reverb_gen_no_bleed", category: "Potopne sedežne opore", label: "Reverb – generalni servis (brez zračenja cevi/ročke)", priceText: "105,00 €" },
+  { id: "reverb_bleed", category: "Potopne sedežne opore", label: "Reverb – zračenje cevi in ročke", priceText: "18,00 €" },
 
-  { id: "transfer_small", category: "Potopne sedežne opore FOX", label: "FOX Transfer – mali servis", priceText: "29,00 €" },
-  { id: "transfer_gen", category: "Potopne sedežne opore FOX", label: "FOX Transfer – generalni servis", priceText: "115,00 €" },
-  { id: "doss_gen", category: "Potopne sedežne opore FOX", label: "FOX D.O.S.S. – generalni servis", priceText: "104,00 €" },
+  { id: "transfer_small", category: "Potopne sedežne opore", label: "FOX Transfer – mali servis", priceText: "29,00 €" },
+  { id: "transfer_gen", category: "Potopne sedežne opore", label: "FOX Transfer – generalni servis", priceText: "115,00 €" },
+  { id: "doss_gen", category: "Potopne sedežne opore", label: "FOX D.O.S.S. – generalni servis", priceText: "104,00 €" },
 
-  // ===================== VZMETENJE (dodatno iz cenika) =====================
-  { id: "sus_hour", category: "Vzmetenje", label: "Servisna ura vzmetenje", priceText: "58,00 €" },
-  { id: "sus_extra_fork_remove_install", category: "Vzmetenje", label: "Doplačilo za demontažo in montažo vilic", priceText: "12,00 €" },
-  { id: "sus_extra_shock_hard_remove_install", category: "Vzmetenje", label: "Doplačilo za zahtevno demontažo in montažo amortizerja", priceText: "Po delovnih urah" },
-  { id: "sus_extra_lock_cable", category: "Vzmetenje", label: "Doplačilo za demontažo/montažo pletenice za zaklep na krmilu", priceText: "10,00 €" },
+  // ===================== VZMETENJE: dodatno =====================
+  { id: "sus_hour", category: "Vzmetenje", label: "Servisna ura – vzmetenje", priceText: "58,00 €" },
+  { id: "sus_fork_remove", category: "Vzmetenje", label: "Doplačilo za demontažo/montažo vilic", priceText: "12,00 €" },
+  { id: "sus_shock_hard", category: "Vzmetenje", label: "Doplačilo za zahtevno demontažo/montažo amortizerja", priceText: "Po delovnih urah" },
+  { id: "sus_lock_cable", category: "Vzmetenje", label: "Doplačilo za demontažo/montažo pletenice za zaklep", priceText: "10,00 €" },
 ];
 
 /* ===================== HELPERS ===================== */
 function uid(prefix = "id") {
   return `${prefix}_${Math.random().toString(16).slice(2)}_${Date.now().toString(16)}`;
 }
+
 function todayISO(): string {
   const d = new Date();
   const y = d.getFullYear();
@@ -269,18 +268,21 @@ function todayISO(): string {
   const da = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${da}`;
 }
+
 function normalize(s: string) {
   return (s || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "");
 }
+
 function hasOpen(customer: Customer): boolean {
   return (customer.workOrders ?? []).some((w) => w.status === "Odprti");
 }
 
-/* ===== Local backup ===== */
+/* ===== Local backup (da nič ne izgubiš) ===== */
 const LS_CUSTOMERS = "bikeapp_customers_TABLE_v2";
+
 function loadCustomers(): Customer[] {
   try {
     const raw = localStorage.getItem(LS_CUSTOMERS);
@@ -292,11 +294,47 @@ function loadCustomers(): Customer[] {
     return [];
   }
 }
+
 function saveCustomers(customers: Customer[]) {
   localStorage.setItem(LS_CUSTOMERS, JSON.stringify(customers));
 }
 
-/* ===== Supabase DB helpers ===== */
+/* ===== Draft helper: localStorage osnutki ===== */
+function useLocalDraft<T extends Record<string, any>>(key: string, getInitial: () => T) {
+  const [state, setState] = React.useState<T>(() => {
+    const init = getInitial();
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return init;
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") return { ...init, ...parsed };
+      return init;
+    } catch {
+      return init;
+    }
+  });
+
+  React.useEffect(() => {
+    try {
+      localStorage.setItem(key, JSON.stringify(state));
+    } catch {
+      // ignore
+    }
+  }, [key, state]);
+
+  const reset = React.useCallback(() => {
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      // ignore
+    }
+    setState(getInitial());
+  }, [key, getInitial]);
+
+  return [state, setState, reset] as const;
+}
+
+/* ===== Supabase DB helpers (customers tabela: id + payload jsonb) ===== */
 async function fetchCustomersFromDb(): Promise<Customer[]> {
   const { data, error } = await supabase
     .from("customers")
@@ -309,9 +347,13 @@ async function fetchCustomersFromDb(): Promise<Customer[]> {
 }
 
 async function upsertCustomerToDb(customer: Customer): Promise<void> {
-  const { error } = await supabase
-    .from("customers")
-    .upsert({ id: customer.id, payload: customer }, { onConflict: "id" });
+  const { error } = await supabase.from("customers").upsert(
+    {
+      id: customer.id,
+      payload: customer,
+    },
+    { onConflict: "id" }
+  );
 
   if (error) throw error;
 }
@@ -395,6 +437,7 @@ export default function App() {
     const saved = localStorage.getItem("theme");
     return saved === "dark" ? "dark" : "light";
   });
+
   React.useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
@@ -417,6 +460,7 @@ export default function App() {
     setActiveCustomerId(id);
     setRoute("profile");
   }
+
   function backHome() {
     setRoute("home");
   }
@@ -432,6 +476,7 @@ export default function App() {
         return;
       }
 
+      // Če je DB prazna, pa imaš kaj v localStorage -> prenesi v DB (da nič ne izgubiš)
       if (tryUploadLocalIfEmpty) {
         const local = loadCustomers();
         if (local.length > 0) {
@@ -461,21 +506,25 @@ export default function App() {
     }
   }
 
-  function patchCustomer(id: string, patch: Partial<Customer>) {
-    setCustomers((prev) => {
-      const next = prev.map((c) => (c.id === id ? { ...c, ...patch } : c));
-      const updated = next.find((x) => x.id === id);
-      if (updated) upsertCustomerToDb(updated).catch(console.error);
-      return next;
-    });
+  function updateCustomer(id: string, patch: Partial<Customer>) {
+    let updatedCustomer: Customer | null = null;
+
+    setCustomers((prev) =>
+      prev.map((c) => {
+        if (c.id !== id) return c;
+        updatedCustomer = { ...c, ...patch };
+        return updatedCustomer;
+      })
+    );
+
+    if (updatedCustomer) {
+      upsertCustomerToDb(updatedCustomer).catch(console.error);
+    }
   }
 
-  function saveCustomer(nextCustomer: Customer) {
-    setCustomers((prev) => {
-      const next = prev.map((c) => (c.id === nextCustomer.id ? nextCustomer : c));
-      return next;
-    });
-    upsertCustomerToDb(nextCustomer).catch(console.error);
+  function saveCustomer(next: Customer) {
+    setCustomers((prev) => prev.map((c) => (c.id === next.id ? next : c)));
+    upsertCustomerToDb(next).catch(console.error);
   }
 
   function deleteCustomer(id: string) {
@@ -517,40 +566,23 @@ export default function App() {
       createdAt: new Date().toISOString(),
     };
 
-    setCustomers((prev) => {
-      const next = prev.map((c) => {
+    let updatedCustomer: Customer | null = null;
+
+    setCustomers((prev) =>
+      prev.map((c) => {
         if (c.id !== customerId) return c;
         const list = c.workOrders ?? [];
-        return { ...c, workOrders: [wo, ...list] };
-      });
-      const updated = next.find((x) => x.id === customerId);
-     if (updated) {
-  upsertCustomerToDb(updated).catch(console.error);
-
-  const to = (updated.email ?? "").trim();
-  if (to) {
-    fetch("/api/send-workorder", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        to,
-        customerName: updated.name,
-        date: wo.date,
-        services: wo.services,
-        appUrl: window.location.origin,
-      }),
-    })
-      .then((r) => r.json())
-      .then((j) => console.log("Email API:", j))
-      .catch((e) => console.error("Email API error:", e));
-  }
-}
- if (updated) upsertCustomerToDb(updated).catch(console.error);
-      return next;
-    });
+        updatedCustomer = { ...c, workOrders: [wo, ...list] };
+        return updatedCustomer;
+      })
+    );
 
     clearDraft();
     openProfile(customerId);
+
+    if (updatedCustomer) {
+      upsertCustomerToDb(updatedCustomer).catch(console.error);
+    }
   }
 
   return (
@@ -560,7 +592,7 @@ export default function App() {
           <div className="appH1">Bike Service App</div>
         </div>
 
-        <button className="themeBtn" onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}>
+        <button className="themeBtn" onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))} type="button">
           {theme === "dark" ? "☀️ Svetla" : "🌙 Temna"}
         </button>
       </header>
@@ -568,7 +600,7 @@ export default function App() {
       {route === "home" && (
         <main className="appMain" style={{ maxWidth: 1200 }}>
           <div style={{ display: "grid", gap: 16, gridTemplateColumns: "1fr 420px" }}>
-            {/* Delovni nalog */}
+            {/* DELovni nalog */}
             <section className="card" style={{ padding: 16 }}>
               <div className="row" style={{ marginBottom: 10 }}>
                 <div className="cardTitle">Delovni nalog</div>
@@ -585,13 +617,7 @@ export default function App() {
 
                 <div>
                   <Label>Delo / servisi</Label>
-                  <textarea
-                    className="input"
-                    value={draftServices}
-                    onChange={(e) => setDraftServices(e.target.value)}
-                    rows={3}
-                    style={{ resize: "vertical" }}
-                  />
+                  <textarea className="input" value={draftServices} onChange={(e) => setDraftServices(e.target.value)} rows={3} style={{ resize: "vertical" }} />
                 </div>
 
                 <div className="row" style={{ gap: 10 }}>
@@ -612,7 +638,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* Stranke */}
+            {/* STRANKE */}
             <section className="card" style={{ padding: 16 }}>
               <div className="row" style={{ marginBottom: 10, alignItems: "baseline" }}>
                 <div className="cardTitle">Stranke</div>
@@ -639,9 +665,9 @@ export default function App() {
         <ProfilePage
           customer={activeCustomer}
           onBack={backHome}
-          onDelete={() => deleteCustomer(activeCustomer.id)}
-          onPatch={(patch) => patchCustomer(activeCustomer.id, patch)}
           onSave={(next) => saveCustomer(next)}
+          onDelete={() => deleteCustomer(activeCustomer.id)}
+          onUpdate={(patch) => updateCustomer(activeCustomer.id, patch)}
         />
       )}
 
@@ -740,7 +766,7 @@ function CustomersPanel(props: {
   const baseList = React.useMemo(() => (openOnly ? props.customers.filter(hasOpen) : props.customers), [openOnly, props.customers]);
 
   const matches = React.useMemo(() => {
-    if (!qn) return openOnly ? baseList.slice(0, 30) : [];
+    if (!qn) return openOnly ? baseList.slice(0, 30) : []; // brez iskanja se ne pokaže seznam
     return baseList.filter((c) => normalize(`${c.name} ${c.phone ?? ""} ${c.email ?? ""}`).includes(qn)).slice(0, 30);
   }, [qn, baseList, openOnly]);
 
@@ -851,8 +877,8 @@ function ProfilePage(props: {
   customer: Customer;
   onBack: () => void;
   onDelete: () => void;
-  onPatch: (patch: Partial<Customer>) => void;
   onSave: (next: Customer) => void;
+  onUpdate: (patch: Partial<Customer>) => void; // (za hitre update na listih)
 }) {
   const c = props.customer;
 
@@ -899,7 +925,7 @@ function ProfilePage(props: {
 
       <div style={{ display: "grid", gap: 12, marginTop: 12 }}>
         <AccordionCard title="Delovni nalogi" isOpen={open === "work"} onToggle={() => toggle("work")}>
-          <WorkOrdersList items={workOrders} onDone={(id) => props.onPatch({ workOrders: workOrders.filter((x) => x.id !== id) })} />
+          <WorkOrdersList items={workOrders} onDone={(id) => props.onUpdate({ workOrders: workOrders.filter((x) => x.id !== id) })} />
         </AccordionCard>
 
         <AccordionCard title="Vzmetenje" isOpen={open === "sus"} onToggle={() => toggle("sus")}>
@@ -917,36 +943,40 @@ function ProfilePage(props: {
 
           {susTab === "fork" && (
             <SuspensionPanelTable
+              customerId={c.id}
               kind="Fork"
               items={susFork}
-              onAdd={(e) => props.onPatch({ susFork: [e, ...susFork] })}
-              onDelete={(id) => props.onPatch({ susFork: susFork.filter((x) => x.id !== id) })}
+              onAdd={(e) => props.onUpdate({ susFork: [e, ...susFork] })}
+              onDelete={(id) => props.onUpdate({ susFork: susFork.filter((x) => x.id !== id) })}
             />
           )}
 
           {susTab === "shock" && (
             <SuspensionPanelTable
+              customerId={c.id}
               kind="Shock"
               items={susShock}
-              onAdd={(e) => props.onPatch({ susShock: [e, ...susShock] })}
-              onDelete={(id) => props.onPatch({ susShock: susShock.filter((x) => x.id !== id) })}
+              onAdd={(e) => props.onUpdate({ susShock: [e, ...susShock] })}
+              onDelete={(id) => props.onUpdate({ susShock: susShock.filter((x) => x.id !== id) })}
             />
           )}
 
           {susTab === "seatpost" && (
             <SeatpostPanelTable
+              customerId={c.id}
               items={seatpost}
-              onAdd={(e) => props.onPatch({ seatpost: [e, ...seatpost] })}
-              onDelete={(id) => props.onPatch({ seatpost: seatpost.filter((x) => x.id !== id) })}
+              onAdd={(e) => props.onUpdate({ seatpost: [e, ...seatpost] })}
+              onDelete={(id) => props.onUpdate({ seatpost: seatpost.filter((x) => x.id !== id) })}
             />
           )}
         </AccordionCard>
 
         <AccordionCard title="Kolo" isOpen={open === "bike"} onToggle={() => toggle("bike")}>
           <BikePanelTable
+            customerId={c.id}
             items={bikes}
-            onAdd={(e) => props.onPatch({ bikes: [e, ...bikes] })}
-            onDelete={(id) => props.onPatch({ bikes: bikes.filter((x) => x.id !== id) })}
+            onAdd={(e) => props.onUpdate({ bikes: [e, ...bikes] })}
+            onDelete={(id) => props.onUpdate({ bikes: bikes.filter((x) => x.id !== id) })}
           />
         </AccordionCard>
       </div>
@@ -954,38 +984,30 @@ function ProfilePage(props: {
   );
 }
 
-/* ====== STRANKA: ročni “SHRANI” ====== */
+/* ===== Manual save form (reši tvoj problem z "ne shrani mail/telefon") ===== */
 function CustomerEditForm(props: { customer: Customer; onSave: (next: Customer) => void }) {
-  const c = props.customer;
-
-  const [name, setName] = React.useState(c.name);
-  const [phone, setPhone] = React.useState(c.phone ?? "");
-  const [email, setEmail] = React.useState(c.email ?? "");
-  const [status, setStatus] = React.useState<string>("");
+  const [name, setName] = React.useState(props.customer.name ?? "");
+  const [phone, setPhone] = React.useState(props.customer.phone ?? "");
+  const [email, setEmail] = React.useState(props.customer.email ?? "");
+  const [msg, setMsg] = React.useState<string>("");
 
   React.useEffect(() => {
-    setName(c.name);
-    setPhone(c.phone ?? "");
-    setEmail(c.email ?? "");
-    setStatus("");
-  }, [c.id]);
+    setName(props.customer.name ?? "");
+    setPhone(props.customer.phone ?? "");
+    setEmail(props.customer.email ?? "");
+    setMsg("");
+  }, [props.customer.id, props.customer.name, props.customer.phone, props.customer.email]);
 
-  async function save() {
-    setStatus("Shranjujem…");
+  function save() {
     const next: Customer = {
-      ...c,
-      name: name.trim() || c.name,
+      ...props.customer,
+      name: name.trim() || props.customer.name,
       phone: phone.trim() ? phone.trim() : undefined,
       email: email.trim() ? email.trim() : undefined,
     };
-
-    try {
-      await upsertCustomerToDb(next); // <-- ključ: dejanski zapis v Supabase
-      props.onSave(next); // <-- osveži UI/state
-      setStatus("Shranjeno ✅");
-    } catch (e: any) {
-      setStatus("Napaka: " + (e?.message ?? String(e)));
-    }
+    props.onSave(next);
+    setMsg("Shranjeno ✅");
+    setTimeout(() => setMsg(""), 1200);
   }
 
   return (
@@ -994,27 +1016,17 @@ function CustomerEditForm(props: { customer: Customer; onSave: (next: Customer) 
       <EditableField label="Telefon" value={phone} onChange={setPhone} />
       <EditableField label="Mail" value={email} onChange={setEmail} />
 
-      <div className="row" style={{ gap: 10, alignItems: "center", justifyContent: "flex-start" }}>
+      <div className="row" style={{ marginTop: 6, alignItems: "center" }}>
         <button className="btn" type="button" onClick={save}>
-          💾 Shrani
+          Shrani
         </button>
-        {status ? (
+        <div style={{ flex: 1 }} />
+        {msg ? (
           <div className="muted" style={{ fontSize: 12, fontWeight: 900 }}>
-            {status}
+            {msg}
           </div>
         ) : null}
       </div>
-    </div>
-  );
-}
-
-function EditableField(props: { label: string; value: string; onChange: (v: string) => void }) {
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 10, alignItems: "center", textAlign: "left" }}>
-      <div className="muted" style={{ fontSize: 12, fontWeight: 800 }}>
-        {props.label}
-      </div>
-      <input className="input" value={props.value} onChange={(e) => props.onChange(e.target.value)} />
     </div>
   );
 }
@@ -1047,6 +1059,17 @@ function TabBtn(props: { active: boolean; onClick: () => void; children: React.R
   );
 }
 
+function EditableField(props: { label: string; value: string; onChange: (v: string) => void }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 10, alignItems: "center", textAlign: "left" }}>
+      <div className="muted" style={{ fontSize: 12, fontWeight: 800 }}>
+        {props.label}
+      </div>
+      <input className="input" value={props.value} onChange={(e) => props.onChange(e.target.value)} />
+    </div>
+  );
+}
+
 function WorkOrdersList(props: { items: WorkOrder[]; onDone: (id: string) => void }) {
   if (props.items.length === 0) return <div className="muted">Ni delovnih nalogov.</div>;
 
@@ -1076,54 +1099,55 @@ function WorkOrdersList(props: { items: WorkOrder[]; onDone: (id: string) => voi
   );
 }
 
-/* ===================== VZMETENJE ===================== */
+/* ===================== VZMETENJE: VNOS + TABELA (DRAFT PERSIST) ===================== */
 function SuspensionPanelTable(props: {
+  customerId: string;
   kind: "Fork" | "Shock";
   items: SuspensionEntry[];
   onAdd: (e: SuspensionEntry) => void;
   onDelete: (id: string) => void;
 }) {
-  const [date, setDate] = React.useState<string>(todayISO());
-  const [model, setModel] = React.useState("");
-  const [serial, setSerial] = React.useState("");
-  const [psi, setPsi] = React.useState("");
-  const [vsPreload, setVsPreload] = React.useState("");
-  const [lsc, setLsc] = React.useState("");
-  const [hsc, setHsc] = React.useState("");
-  const [lsr, setLsr] = React.useState("");
-  const [hsr, setHsr] = React.useState("");
-  const [service, setService] = React.useState("");
-  const [notes, setNotes] = React.useState("");
+  const draftKey = `bikeapp_draft_${props.customerId}_sus_${props.kind.toLowerCase()}`;
+
+  const getInitial = React.useCallback(
+    () => ({
+      date: todayISO(),
+      model: "",
+      serial: "",
+      psi: "",
+      vsPreload: "",
+      lsc: "",
+      hsc: "",
+      lsr: "",
+      hsr: "",
+      service: "",
+      notes: "",
+    }),
+    []
+  );
+
+  const [draft, setDraft, resetDraft] = useLocalDraft(draftKey, getInitial);
 
   function add() {
-    if (!model.trim() && !serial.trim() && !service.trim() && !notes.trim()) return;
+    if (!draft.model.trim() && !draft.serial.trim() && !draft.service.trim() && !draft.notes.trim()) return;
 
     props.onAdd({
       id: uid("sus"),
-      date,
-      model: model.trim(),
-      serial: serial.trim(),
-      psi: psi.trim(),
-      vsPreload: vsPreload.trim(),
-      lsc: lsc.trim(),
-      hsc: hsc.trim(),
-      lsr: lsr.trim(),
-      hsr: hsr.trim(),
-      service: service.trim(),
-      notes: notes.trim(),
+      date: draft.date,
+      model: draft.model.trim(),
+      serial: draft.serial.trim(),
+      psi: draft.psi.trim(),
+      vsPreload: draft.vsPreload.trim(),
+      lsc: draft.lsc.trim(),
+      hsc: draft.hsc.trim(),
+      lsr: draft.lsr.trim(),
+      hsr: draft.hsr.trim(),
+      service: draft.service.trim(),
+      notes: draft.notes.trim(),
       createdAt: new Date().toISOString(),
     });
 
-    setModel("");
-    setSerial("");
-    setPsi("");
-    setVsPreload("");
-    setLsc("");
-    setHsc("");
-    setLsr("");
-    setHsr("");
-    setService("");
-    setNotes("");
+    resetDraft(); // <- po shranitvi pobriše osnutek
   }
 
   return (
@@ -1132,51 +1156,57 @@ function SuspensionPanelTable(props: {
         {props.kind.toUpperCase()}
       </div>
 
+      {/* VNOS */}
       <div style={{ display: "grid", gap: 10, gridTemplateColumns: "1fr 1fr 1fr" }}>
         <Field label="Datum">
-          <input className="input" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input className="input" type="date" value={draft.date} onChange={(e) => setDraft((d) => ({ ...d, date: e.target.value }))} />
         </Field>
         <Field label="Model">
-          <input className="input" value={model} onChange={(e) => setModel(e.target.value)} />
+          <input className="input" value={draft.model} onChange={(e) => setDraft((d) => ({ ...d, model: e.target.value }))} />
         </Field>
         <Field label="Serijska">
-          <input className="input" value={serial} onChange={(e) => setSerial(e.target.value)} />
+          <input className="input" value={draft.serial} onChange={(e) => setDraft((d) => ({ ...d, serial: e.target.value }))} />
         </Field>
       </div>
 
       <div style={{ display: "grid", gap: 10, gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr" }}>
         <Field label="PSI">
-          <input className="input" value={psi} onChange={(e) => setPsi(e.target.value)} />
+          <input className="input" value={draft.psi} onChange={(e) => setDraft((d) => ({ ...d, psi: e.target.value }))} />
         </Field>
         <Field label="VS/Preload">
-          <input className="input" value={vsPreload} onChange={(e) => setVsPreload(e.target.value)} />
+          <input className="input" value={draft.vsPreload} onChange={(e) => setDraft((d) => ({ ...d, vsPreload: e.target.value }))} />
         </Field>
         <Field label="LSC" tint="blue">
-          <input className="input" value={lsc} onChange={(e) => setLsc(e.target.value)} />
+          <input className="input" value={draft.lsc} onChange={(e) => setDraft((d) => ({ ...d, lsc: e.target.value }))} />
         </Field>
         <Field label="HSC" tint="blue">
-          <input className="input" value={hsc} onChange={(e) => setHsc(e.target.value)} />
+          <input className="input" value={draft.hsc} onChange={(e) => setDraft((d) => ({ ...d, hsc: e.target.value }))} />
         </Field>
         <Field label="LSR" tint="red">
-          <input className="input" value={lsr} onChange={(e) => setLsr(e.target.value)} />
+          <input className="input" value={draft.lsr} onChange={(e) => setDraft((d) => ({ ...d, lsr: e.target.value }))} />
         </Field>
         <Field label="HSR" tint="red">
-          <input className="input" value={hsr} onChange={(e) => setHsr(e.target.value)} />
+          <input className="input" value={draft.hsr} onChange={(e) => setDraft((d) => ({ ...d, hsr: e.target.value }))} />
         </Field>
       </div>
 
       <div style={{ display: "grid", gap: 10, gridTemplateColumns: "1fr 1fr" }}>
         <Field label="Servis">
-          <input className="input" value={service} onChange={(e) => setService(e.target.value)} />
+          <input className="input" value={draft.service} onChange={(e) => setDraft((d) => ({ ...d, service: e.target.value }))} />
         </Field>
         <Field label="Opombe">
-          <input className="input" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          <input className="input" value={draft.notes} onChange={(e) => setDraft((d) => ({ ...d, notes: e.target.value }))} />
         </Field>
       </div>
 
-      <button className="btn" onClick={add} type="button">
-        + Shrani vnos
-      </button>
+      <div className="row" style={{ gap: 10 }}>
+        <button className="btn" onClick={add} type="button">
+          + Shrani vnos
+        </button>
+        <button className="btn btnDanger" onClick={resetDraft} type="button">
+          Počisti osnutek
+        </button>
+      </div>
 
       <SuspensionTableNoScroll items={props.items} onDelete={props.onDelete} />
     </div>
@@ -1234,59 +1264,70 @@ function SuspensionTableNoScroll(props: { items: SuspensionEntry[]; onDelete: (i
   );
 }
 
-/* ===================== SEATPOST ===================== */
-function SeatpostPanelTable(props: { items: SeatpostEntry[]; onAdd: (e: SeatpostEntry) => void; onDelete: (id: string) => void }) {
-  const [date, setDate] = React.useState<string>(todayISO());
-  const [model, setModel] = React.useState("");
-  const [serial, setSerial] = React.useState("");
-  const [service, setService] = React.useState("");
-  const [notes, setNotes] = React.useState("");
+/* ===================== SEATPOST: VNOS + TABELA (DRAFT PERSIST) ===================== */
+function SeatpostPanelTable(props: { customerId: string; items: SeatpostEntry[]; onAdd: (e: SeatpostEntry) => void; onDelete: (id: string) => void }) {
+  const draftKey = `bikeapp_draft_${props.customerId}_seatpost`;
+
+  const getInitial = React.useCallback(
+    () => ({
+      date: todayISO(),
+      model: "",
+      serial: "",
+      service: "",
+      notes: "",
+    }),
+    []
+  );
+
+  const [draft, setDraft, resetDraft] = useLocalDraft(draftKey, getInitial);
 
   function add() {
-    if (!model.trim() && !serial.trim() && !service.trim() && !notes.trim()) return;
+    if (!draft.model.trim() && !draft.serial.trim() && !draft.service.trim() && !draft.notes.trim()) return;
 
     props.onAdd({
       id: uid("sp"),
-      date,
-      model: model.trim(),
-      serial: serial.trim(),
-      service: service.trim(),
-      notes: notes.trim(),
+      date: draft.date,
+      model: draft.model.trim(),
+      serial: draft.serial.trim(),
+      service: draft.service.trim(),
+      notes: draft.notes.trim(),
       createdAt: new Date().toISOString(),
     });
 
-    setModel("");
-    setSerial("");
-    setService("");
-    setNotes("");
+    resetDraft();
   }
 
   return (
     <div style={{ display: "grid", gap: 12 }}>
       <div style={{ display: "grid", gap: 10, gridTemplateColumns: "1fr 1fr 1fr" }}>
         <Field label="Datum">
-          <input className="input" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input className="input" type="date" value={draft.date} onChange={(e) => setDraft((d) => ({ ...d, date: e.target.value }))} />
         </Field>
         <Field label="Model">
-          <input className="input" value={model} onChange={(e) => setModel(e.target.value)} />
+          <input className="input" value={draft.model} onChange={(e) => setDraft((d) => ({ ...d, model: e.target.value }))} />
         </Field>
         <Field label="Serijska">
-          <input className="input" value={serial} onChange={(e) => setSerial(e.target.value)} />
+          <input className="input" value={draft.serial} onChange={(e) => setDraft((d) => ({ ...d, serial: e.target.value }))} />
         </Field>
       </div>
 
       <div style={{ display: "grid", gap: 10, gridTemplateColumns: "1fr 1fr" }}>
         <Field label="Servis">
-          <input className="input" value={service} onChange={(e) => setService(e.target.value)} />
+          <input className="input" value={draft.service} onChange={(e) => setDraft((d) => ({ ...d, service: e.target.value }))} />
         </Field>
         <Field label="Opombe">
-          <input className="input" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          <input className="input" value={draft.notes} onChange={(e) => setDraft((d) => ({ ...d, notes: e.target.value }))} />
         </Field>
       </div>
 
-      <button className="btn" onClick={add} type="button">
-        + Shrani vnos
-      </button>
+      <div className="row" style={{ gap: 10 }}>
+        <button className="btn" onClick={add} type="button">
+          + Shrani vnos
+        </button>
+        <button className="btn btnDanger" onClick={resetDraft} type="button">
+          Počisti osnutek
+        </button>
+      </div>
 
       <SeatpostTableNoScroll items={props.items} onDelete={props.onDelete} />
     </div>
@@ -1332,53 +1373,65 @@ function SeatpostTableNoScroll(props: { items: SeatpostEntry[]; onDelete: (id: s
   );
 }
 
-/* ===================== KOLO ===================== */
-function BikePanelTable(props: { items: BikeEntry[]; onAdd: (e: BikeEntry) => void; onDelete: (id: string) => void }) {
-  const [date, setDate] = React.useState<string>(todayISO());
-  const [bikeModel, setBikeModel] = React.useState("");
-  const [service, setService] = React.useState("");
-  const [notes, setNotes] = React.useState("");
+/* ===================== KOLO: VNOS + TABELA (DRAFT PERSIST) ===================== */
+function BikePanelTable(props: { customerId: string; items: BikeEntry[]; onAdd: (e: BikeEntry) => void; onDelete: (id: string) => void }) {
+  const draftKey = `bikeapp_draft_${props.customerId}_bike`;
+
+  const getInitial = React.useCallback(
+    () => ({
+      date: todayISO(),
+      bikeModel: "",
+      service: "",
+      notes: "",
+    }),
+    []
+  );
+
+  const [draft, setDraft, resetDraft] = useLocalDraft(draftKey, getInitial);
 
   function add() {
-    if (!bikeModel.trim() && !service.trim() && !notes.trim()) return;
+    if (!draft.bikeModel.trim() && !draft.service.trim() && !draft.notes.trim()) return;
 
     props.onAdd({
       id: uid("bike"),
-      date,
-      bikeModel: bikeModel.trim(),
-      service: service.trim(),
-      notes: notes.trim(),
+      date: draft.date,
+      bikeModel: draft.bikeModel.trim(),
+      service: draft.service.trim(),
+      notes: draft.notes.trim(),
       createdAt: new Date().toISOString(),
     });
 
-    setBikeModel("");
-    setService("");
-    setNotes("");
+    resetDraft();
   }
 
   return (
     <div style={{ display: "grid", gap: 12 }}>
       <div style={{ display: "grid", gap: 10, gridTemplateColumns: "160px 1fr" }}>
         <Field label="Datum">
-          <input className="input" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input className="input" type="date" value={draft.date} onChange={(e) => setDraft((d) => ({ ...d, date: e.target.value }))} />
         </Field>
         <Field label="Model kolesa">
-          <input className="input" value={bikeModel} onChange={(e) => setBikeModel(e.target.value)} />
+          <input className="input" value={draft.bikeModel} onChange={(e) => setDraft((d) => ({ ...d, bikeModel: e.target.value }))} />
         </Field>
       </div>
 
       <div style={{ display: "grid", gap: 10, gridTemplateColumns: "1fr 1fr" }}>
         <Field label="Servis">
-          <input className="input" value={service} onChange={(e) => setService(e.target.value)} />
+          <input className="input" value={draft.service} onChange={(e) => setDraft((d) => ({ ...d, service: e.target.value }))} />
         </Field>
         <Field label="Opombe">
-          <input className="input" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          <input className="input" value={draft.notes} onChange={(e) => setDraft((d) => ({ ...d, notes: e.target.value }))} />
         </Field>
       </div>
 
-      <button className="btn" onClick={add} type="button">
-        + Shrani vnos
-      </button>
+      <div className="row" style={{ gap: 10 }}>
+        <button className="btn" onClick={add} type="button">
+          + Shrani vnos
+        </button>
+        <button className="btn btnDanger" onClick={resetDraft} type="button">
+          Počisti osnutek
+        </button>
+      </div>
 
       <BikeTableNoScroll items={props.items} onDelete={props.onDelete} />
     </div>
@@ -1428,6 +1481,7 @@ function Label(props: { children: React.ReactNode }) {
     </div>
   );
 }
+
 function Field(props: { label: string; tint?: "blue" | "red"; children: React.ReactNode }) {
   const color = props.tint === "blue" ? "#2563eb" : props.tint === "red" ? "#dc2626" : "var(--muted)";
   return (
