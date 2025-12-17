@@ -1,19 +1,43 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+function escapeHtml(s: string) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function escapeAttr(s: string) {
+  return escapeHtml(s).replace(/"/g, "%22");
+}
+
+export default async function handler(req: any, res: any) {
   try {
     if (req.method !== "POST") {
       return res.status(405).json({ ok: false, error: "Method not allowed" });
     }
 
-    const { to, customerName, date, services, appUrl } = req.body ?? {};
+    // Vercel včasih da body kot string
+    let body = req.body;
+    if (typeof body === "string") {
+      try {
+        body = JSON.parse(body);
+      } catch {
+        // ignore
+      }
+    }
+
+    const { to, customerName, date, services, appUrl } = body ?? {};
+
+    if (!process.env.RESEND_API_KEY) {
+      return res.status(500).json({ ok: false, error: "Missing RESEND_API_KEY" });
+    }
 
     if (!to || typeof to !== "string" || !isValidEmail(to)) {
       return res.status(400).json({ ok: false, error: "Manjka ali neveljaven email (to)" });
@@ -22,8 +46,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ ok: false, error: "Manjka services" });
     }
 
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     const from = process.env.RESEND_FROM || "Bike Service <onboarding@resend.dev>";
-    const subject = `Delovni nalog${customerName ? ` – ${customerName}` : ""}${date ? ` (${date})` : ""}`;
+    const subject = `Delovni nalog${typeof customerName === "string" && customerName ? ` – ${customerName}` : ""}${
+      typeof date === "string" && date ? ` (${date})` : ""
+    }`;
 
     const safeCustomer = typeof customerName === "string" ? customerName : "";
     const safeDate = typeof date === "string" ? date : "";
@@ -49,34 +77,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `<div style="margin-top:18px;color:#6b7280">Lp,<br/>Bike Service</div>` +
       `</div>`;
 
-    const { error } = await resend.emails.send({
-      from,
-      to,
-      subject,
-      text,
-      html,
-    });
+    const result = await resend.emails.send({ from, to, subject, text, html });
 
-    if (error) {
-      return res.status(500).json({ ok: false, error: error.message ?? String(error) });
+    if (result.error) {
+      return res.status(500).json({ ok: false, error: result.error.message ?? String(result.error) });
     }
 
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true, id: result.data?.id ?? null });
   } catch (e: any) {
     return res.status(500).json({ ok: false, error: e?.message ?? String(e) });
   }
-}
-
-function escapeHtml(s: string) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function escapeAttr(s: string) {
-  // minimalno, za href
-  return escapeHtml(s).replace(/"/g, "%22");
 }
