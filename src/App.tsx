@@ -1013,3 +1013,21 @@ function Field(props: { label: string; tint?: "blue" | "red"; children: React.Re
     </div>
   );
 }
+function EditableInput(props: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 10 }}>
+      <div className="muted" style={{ fontSize: 12, fontWeight: 800 }}>
+        {props.label}
+      </div>
+      <input
+        className="input"
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value)}
+      />
+    </div>
+  );
+}
