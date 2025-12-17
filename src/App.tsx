@@ -591,13 +591,7 @@ function ProfilePage(props: { customer: Customer; onBack: () => void; onDelete: 
           </div>
         </div>
 
-        {showCustomerDetails && (
-          <div style={{ display: "grid", gap: 8, maxWidth: 520, marginTop: 12 }}>
-            <EditableField label="Ime" value={c.name} onCommit={(v) => patch({ name: v })} />
-            <EditableField label="Telefon" value={c.phone ?? ""} onCommit={(v) => patch({ phone: v.trim() ? v : undefined })} />
-            <EditableField label="Mail" value={c.email ?? ""} onCommit={(v) => patch({ email: v.trim() ? v : undefined })} />
-          </div>
-        )}
+{showCustomerDetails && <CustomerEditForm customer={c} onSave={props.onUpdate} />}
       </section>
 
       <div style={{ display: "grid", gap: 12, marginTop: 12 }}>
@@ -630,7 +624,47 @@ function ProfilePage(props: { customer: Customer; onBack: () => void; onDelete: 
     </main>
   );
 }
+function CustomerEditForm(props: {
+  customer: Customer;
+  onSave: (patch: Partial<Customer>) => void;
+}) {
+  const [name, setName] = React.useState(props.customer.name);
+  const [phone, setPhone] = React.useState(props.customer.phone ?? "");
+  const [email, setEmail] = React.useState(props.customer.email ?? "");
+  const [saved, setSaved] = React.useState(false);
 
+  React.useEffect(() => {
+    setName(props.customer.name);
+    setPhone(props.customer.phone ?? "");
+    setEmail(props.customer.email ?? "");
+    setSaved(false);
+  }, [props.customer.id]);
+
+  function save() {
+    props.onSave({
+      name: name.trim(),
+      phone: phone.trim() || undefined,
+      email: email.trim() || undefined,
+    });
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  }
+
+  return (
+    <div style={{ display: "grid", gap: 10, maxWidth: 520, marginTop: 12 }}>
+      <EditableInput label="Ime" value={name} onChange={setName} />
+      <EditableInput label="Telefon" value={phone} onChange={setPhone} />
+      <EditableInput label="Mail" value={email} onChange={setEmail} />
+
+      <div className="row" style={{ marginTop: 8 }}>
+        <button className="btn" type="button" onClick={save}>
+          💾 Shrani stranko
+        </button>
+        {saved && <span className="muted">✔ Shranjeno</span>}
+      </div>
+    </div>
+  );
+}
 function AccordionCard(props: { title: string; isOpen: boolean; onToggle: () => void; children: React.ReactNode }) {
   return (
     <section className="card" style={{ padding: 12 }}>
