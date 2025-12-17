@@ -71,6 +71,7 @@ type PriceItem = {
 };
 
 /* ===================== CENIK (osnova) ===================== */
+/* ===================== CENIK (celoten) ===================== */
 const PRICELIST: PriceItem[] = [
   // ===================== PAKETI =====================
   { id: "pkg_basic", category: "Paketi", label: "Osnovni servis", priceText: "58,00 €", isPackage: true },
@@ -127,6 +128,7 @@ const PRICELIST: PriceItem[] = [
   { id: "srv_derailleur_swap_adjust", category: "Posamezni servisi", label: "Zamenjava in nastavitev menjalnika", priceText: "30,00 €" },
   { id: "srv_shifter_repair", category: "Posamezni servisi", label: "Popravilo ali zamenjava prestavne ročke", priceText: "Po delovnih urah" },
 
+  // Zavore (kot prej, samo kategorija “Zavore”)
   { id: "srv_hydro_brake_install", category: "Zavore", label: "Montaža hidravlične zavore (prednja ali zadnja)", priceText: "Po delovnih urah" },
   { id: "srv_brake_adjust", category: "Zavore", label: "Nastavitev zavor", priceText: "Od 17,00 € naprej" },
   { id: "srv_brake_bleed", category: "Zavore", label: "Zračenje hidravlične zavore z menjavo olja (olje vključeno)", priceText: "22,00 €" },
@@ -173,15 +175,15 @@ const PRICELIST: PriceItem[] = [
 
   { id: "fox34_small", category: "Vilice FOX & Marzocchi", label: "FOX 34 / Marzocchi Z2 – mali servis", priceText: "39,00 €" },
   { id: "fox34_basic", category: "Vilice FOX & Marzocchi", label: "FOX 34 / Marzocchi Z2 – osnovni servis", priceText: "89,00 €" },
-  { id: "fox34_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 34 (od 2016 NA2) – generalni servis", priceText: "149,00 €" },
+  { id: "fox34_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 34 (od 2016 naprej NA2) – generalni servis", priceText: "149,00 €" },
   { id: "fox34_gen_old", category: "Vilice FOX & Marzocchi", label: "FOX 34 (do 2016) – generalni servis", priceText: "125,00 €" },
   { id: "z2_gen", category: "Vilice FOX & Marzocchi", label: "Marzocchi Z2 – generalni servis", priceText: "149,00 €" },
 
   { id: "fox36_small", category: "Vilice FOX & Marzocchi", label: "FOX 36 / Marzocchi / DJ – mali servis", priceText: "39,00 €" },
   { id: "fox36_basic", category: "Vilice FOX & Marzocchi", label: "FOX 36 / Marzocchi / DJ – osnovni servis", priceText: "89,00 €" },
-  { id: "fox36_gen_na3", category: "Vilice FOX & Marzocchi", label: "FOX 36 (od 2016 NA3) – generalni servis", priceText: "169,00 €" },
+  { id: "fox36_gen_na3", category: "Vilice FOX & Marzocchi", label: "FOX 36 (od 2016 naprej NA3) – generalni servis", priceText: "169,00 €" },
   { id: "fox36_gen_2015_2025", category: "Vilice FOX & Marzocchi", label: "FOX 36 (2015–2025 NA/NA2) – generalni servis", priceText: "159,00 €" },
-  { id: "fox36_gen_to2025", category: "Vilice FOX & Marzocchi", label: "FOX 36 (do 2025) – generalni servis", priceText: "139,00 €" },
+  { id: "fox36_gen_to2015", category: "Vilice FOX & Marzocchi", label: "FOX 36 (do 2015) – generalni servis", priceText: "139,00 €" },
   { id: "z1_gen", category: "Vilice FOX & Marzocchi", label: "Marzocchi Z1 – generalni servis", priceText: "155,00 €" },
   { id: "z1_coil_gen", category: "Vilice FOX & Marzocchi", label: "Marzocchi Z1 COIL – generalni servis", priceText: "143,00 €" },
 
@@ -191,7 +193,7 @@ const PRICELIST: PriceItem[] = [
 
   { id: "fox40_small", category: "Vilice FOX & Marzocchi", label: "FOX 40 / Bomber 58 – mali servis", priceText: "39,00 €" },
   { id: "fox40_basic", category: "Vilice FOX & Marzocchi", label: "FOX 40 / Bomber 58 – osnovni servis", priceText: "95,00 €" },
-  { id: "fox40_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 40 (od 2016 NA2) – generalni servis", priceText: "175,00 €" },
+  { id: "fox40_gen_na2", category: "Vilice FOX & Marzocchi", label: "FOX 40 (od 2016 naprej NA2) – generalni servis", priceText: "175,00 €" },
   { id: "fox40_gen_old", category: "Vilice FOX & Marzocchi", label: "FOX 40 (do 2016) – generalni servis", priceText: "140,00 €" },
   { id: "bomber58_gen", category: "Vilice FOX & Marzocchi", label: "Marzocchi Bomber 58 – generalni servis", priceText: "174,00 €" },
 
@@ -223,18 +225,37 @@ const PRICELIST: PriceItem[] = [
   { id: "fox_drcv_small", category: "Amortizerji FOX", label: "Float DRCV – mali servis", priceText: "32,00 €" },
   { id: "fox_drcv_gen", category: "Amortizerji FOX", label: "Float DRCV – generalni servis", priceText: "119,00 €" },
 
-  { id: "fox_nude_gen", category: "Amortizerji FOX", label: "Float NUDE 3-5/T/TR – generalni servis", priceText: "115,00 €" },
+  { id: "fox_nude_gen", category: "Amortizerji FOX", label: "Float NUDE 3–5/T/TR – generalni servis", priceText: "115,00 €" },
   { id: "fox_dhx2_gen", category: "Amortizerji FOX", label: "DHX2 / DHX RC2/RC4 – generalni servis", priceText: "115,00 €" },
   { id: "fox_van_gen", category: "Amortizerji FOX", label: "VAN R/RC, DHX 3.0/4.0/5.0 – generalni servis", priceText: "110,00 €" },
 
-  // ===================== SEDEŽNE OPORE =====================
-  { id: "reverb_small", category: "Potopne sedežne opore", label: "RockShox Reverb – mali servis", priceText: "29,00 €" },
-  { id: "reverb_gen", category: "Potopne sedežne opore", label: "RockShox Reverb – generalni servis", priceText: "115,00 €" },
-  { id: "reverb_gen_no_bleed", category: "Potopne sedežne opore", label: "RockShox Reverb – generalni servis (brez zračenja cevi/ročke)", priceText: "105,00 €" },
-  { id: "reverb_bleed", category: "Potopne sedežne opore", label: "RockShox Reverb – zračenje cevi in ročke", priceText: "18,00 €" },
+  // dodatki iz tvojega cenika (FOX amortizerji)
+  { id: "cannondale_gemini_small", category: "Amortizerji FOX", label: "Cannondale GEMINI – mali servis", priceText: "35,00 €" },
+  { id: "cannondale_gemini_gen", category: "Amortizerji FOX", label: "Cannondale GEMINI – generalni servis", priceText: "109,00 €" },
+  { id: "cannondale_dyad_gen", category: "Amortizerji FOX", label: "Cannondale DYAD – generalni servis", priceText: "150,00 €" },
+  { id: "canyon_shapeshifter_gen", category: "Amortizerji FOX", label: "Canyon Shapeshifter 2.0 – generalni servis", priceText: "95,00 €" },
 
-  { id: "transfer_small", category: "Potopne sedežne opore", label: "FOX Transfer – mali servis", priceText: "29,00 €" },
-  { id: "transfer_gen", category: "Potopne sedežne opore", label: "FOX Transfer – generalni servis", priceText: "115,00 €" },
+  // ===================== VILICE CANNONDALE =====================
+  { id: "lefty_small", category: "Vilice Cannondale", label: "Lefty Speed/Hybrid/Ocho/Oliver – mali servis", priceText: "39,00 €" },
+  { id: "lefty_basic", category: "Vilice Cannondale", label: "Lefty Speed/Hybrid/Ocho/Oliver – osnovni servis", priceText: "95,00 €" },
+  { id: "lefty_gen", category: "Vilice Cannondale", label: "Lefty Speed/Hybrid/Ocho/Oliver – generalni servis", priceText: "150,00 €" },
+  { id: "headshok_gen", category: "Vilice Cannondale", label: "Headshok – generalni servis", priceText: "115,00 €" },
+
+  // ===================== POTOPNE SEDEŽNE OPORE =====================
+  { id: "reverb_small", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – mali servis", priceText: "29,00 €" },
+  { id: "reverb_gen", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – generalni servis", priceText: "115,00 €" },
+  { id: "reverb_gen_no_bleed", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – generalni servis (brez zračenja cevi/ročke)", priceText: "105,00 €" },
+  { id: "reverb_bleed", category: "Potopne sedežne opore RockShox", label: "RockShox Reverb – zračenje cevi in ročke", priceText: "18,00 €" },
+
+  { id: "transfer_small", category: "Potopne sedežne opore FOX", label: "FOX Transfer – mali servis", priceText: "29,00 €" },
+  { id: "transfer_gen", category: "Potopne sedežne opore FOX", label: "FOX Transfer – generalni servis", priceText: "115,00 €" },
+  { id: "doss_gen", category: "Potopne sedežne opore FOX", label: "FOX D.O.S.S. – generalni servis", priceText: "104,00 €" },
+
+  // ===================== VZMETENJE (dodatno iz cenika) =====================
+  { id: "sus_hour", category: "Vzmetenje", label: "Servisna ura vzmetenje", priceText: "58,00 €" },
+  { id: "sus_extra_fork_remove_install", category: "Vzmetenje", label: "Doplačilo za demontažo in montažo vilic", priceText: "12,00 €" },
+  { id: "sus_extra_shock_hard_remove_install", category: "Vzmetenje", label: "Doplačilo za zahtevno demontažo in montažo amortizerja", priceText: "Po delovnih urah" },
+  { id: "sus_extra_lock_cable", category: "Vzmetenje", label: "Doplačilo za demontažo/montažo pletenice za zaklep na krmilu", priceText: "10,00 €" },
 ];
 
 /* ===================== HELPERS ===================== */
@@ -503,7 +524,28 @@ export default function App() {
         return { ...c, workOrders: [wo, ...list] };
       });
       const updated = next.find((x) => x.id === customerId);
-      if (updated) upsertCustomerToDb(updated).catch(console.error);
+     if (updated) {
+  upsertCustomerToDb(updated).catch(console.error);
+
+  const to = (updated.email ?? "").trim();
+  if (to) {
+    fetch("/api/send-workorder", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        to,
+        customerName: updated.name,
+        date: wo.date,
+        services: wo.services,
+        appUrl: window.location.origin,
+      }),
+    })
+      .then((r) => r.json())
+      .then((j) => console.log("Email API:", j))
+      .catch((e) => console.error("Email API error:", e));
+  }
+}
+ if (updated) upsertCustomerToDb(updated).catch(console.error);
       return next;
     });
 
